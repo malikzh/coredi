@@ -1,6 +1,9 @@
 const assert = require('assert');
 const sinon = require('sinon');
-const proxyquire = require('proxyquire').noPreserveCache().noCallThru();
+const proxyquire = require('proxyquire');
+
+proxyquire.noPreserveCache && proxyquire.noPreserveCache();
+proxyquire.noCallThru && proxyquire.noCallThru();
 
 describe('Coredi Builder test', async function() {
   let sandbox;

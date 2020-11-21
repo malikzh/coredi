@@ -3,6 +3,20 @@ const sinon = require('sinon');
 
 const loadService = require('../service-loader');
 
+if (!assert.rejects) {
+  assert.rejects = async function(func) {
+    let rejected = false;
+
+    try {
+      await func()
+    } catch(e) {
+      rejected = true;
+    }
+
+    assert.ok(rejected);
+  };
+}
+
 describe('Service loader test', function() {
   let sandbox;
 
