@@ -21,3 +21,8 @@ npm install @empla/coredi
 ## Documentation
 
 - [Getting started](getting-started.md)
+- [Schemas](schemas.md)
+- [Service Loaders](service-loaders.md)
+- [Services resolving](services-resolving.md)
+- [Container forking](container-forking.md)
+- [Service Groups](service-groups.md)

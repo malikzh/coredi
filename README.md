@@ -24,25 +24,26 @@ npm install @empla/coredi
 ## Usage
 
 ```js
-const createContainer = require('@empla/coredi');
+const coredi = require('@empla/coredi');
 
-const container = createContainer({
-    mycontainer: {
+coredi({
+    app: {
         loaders: [
             {
                 name: 'myservice',
+                config: {
+                    param: 'defaultValue'
+                },
                 async create(container) {
-                    return myService;
-                }
-            }
+                    return myServiceObject;
+                },
+            },
         ],
-        config: {
-            myservice: {}
-        },
     },
-}, 'mycontainer');
-
-const myService = container('mycontainer');
+}, 'app').then(function(container) {
+    const myservice = container('myservice');  
+    // ...
+});
 ```
 
 ## Documentation
