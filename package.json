@@ -1,6 +1,6 @@
 {
-  "name": "coredi",
-  "version": "1.0.0",
+  "name": "@empla/coredi",
+  "version": "1.0.3",
   "description": "Dependency Injection library for Node.js and Browser",
   "main": "coredi.js",
   "scripts": {
