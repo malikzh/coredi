@@ -18,9 +18,6 @@ coredi({
         loaders: [
             {
                 name: 'myservice',
-                config: {
-                    param: 'defaultValue'
-                },
                 async create(container) {
                     return myServiceObject;
                 },
@@ -29,6 +26,6 @@ coredi({
     },
 }, 'app').then(function(container) {
     const myservice = container('myservice');  
-    // ...
+    // myservice is myServiceObject ...
 });
 ```
