@@ -1,9 +1,9 @@
-const ServiceGroup = require('../service-group');
+const serviceGroup = require('../service-group');
 const assert = require('assert');
 
 describe('Service groups test', async function() {
   it('requires test', async function() {
-    const group = ServiceGroup('testx', [
+    const group = serviceGroup('testx', [
       {
         name: 'test1',
         requires: 'svc1',
@@ -14,9 +14,6 @@ describe('Service groups test', async function() {
           assert.strictEqual(this.config.param1, 'a');
           return 'test1x';
         },
-        async fork(container) {
-          return 'test2x';
-        },
       },
       {
         name: 'test2',
@@ -24,7 +21,10 @@ describe('Service groups test', async function() {
         async create(container) {
           return 'test3x';
         },
-      }
+        async fork(container) {
+          return 'test2x';
+        },
+      },
     ]);
 
     group.config = {
@@ -43,5 +43,6 @@ describe('Service groups test', async function() {
 
     assert.deepStrictEqual(group.requires, ['svc1', 'svc2', 'svc3']);
     assert.strictEqual(svc('test1'), 'test1x');
+    assert.strictEqual(forked('test2'), 'test2x');
   });
 });

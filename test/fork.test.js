@@ -5,11 +5,11 @@ const proxyquire = require('proxyquire').noPreserveCache().noCallThru();
 describe('Coredi Builder test', async function() {
   let sandbox;
 
-  beforeEach(function () {
+  beforeEach(function() {
     sandbox = sinon.createSandbox();
   });
 
-  afterEach(function () {
+  afterEach(function() {
     sandbox.restore();
   });
 
