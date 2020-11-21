@@ -1,0 +1,29 @@
+{
+  "name": "coredi",
+  "version": "1.0.0",
+  "description": "Dependency Injection library for Node.js and Browser",
+  "main": "coredi.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/empla/coredi.git"
+  },
+  "keywords": [
+    "dependency",
+    "injection",
+    "di",
+    "service",
+    "container",
+    "empla",
+    "module",
+    "system"
+  ],
+  "author": "EMPLA GROUP, Ltd",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/empla/coredi/issues"
+  },
+  "homepage": "https://github.com/empla/coredi#readme"
+}
