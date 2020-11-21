@@ -27,7 +27,7 @@
   "bugs": {
     "url": "https://github.com/empla/coredi/issues"
   },
-  "homepage": "https://github.com/empla/coredi#readme",
+  "homepage": "https://coredi.js.org",
   "dependencies": {
     "lodash": "^4.17.20"
   },
