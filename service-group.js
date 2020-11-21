@@ -7,11 +7,12 @@ const _ = require('lodash');
  * @param {Object[]} loaders Loaders array
  * @return {Object}
  */
-module.exports = function (groupName, loaders) {
-
+module.exports = function(groupName, loaders) {
   let requires = [];
 
-  loaders.forEach((loader) => { requires.push(loader.requires || []) });
+  loaders.forEach((loader) => {
+    requires.push(loader.requires || []);
+  });
 
   requires = requires.map((item) => _.isArray(item) ? item : [item]);
 
@@ -28,7 +29,7 @@ module.exports = function (groupName, loaders) {
 
       for (const loader of loaders) {
         loader.config = _.defaultsDeep(this.config[loader.name] || {},
-          loader.config);
+            loader.config);
 
         if (useFork && _.isFunction(loader.fork)) {
           service.services[loader.name] = await loader.fork(container);

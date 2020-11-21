@@ -55,15 +55,16 @@ module.exports = async function loadService(container, serviceName,
     serviceLoader.config = _.defaultsDeep(
         container.schema[container.containerName].config[serviceName],
         serviceLoader.config);
-    container.schema[container.containerName].config[serviceName] = serviceLoader.config;
+    container.schema[container.containerName]
+        .config[serviceName] = serviceLoader.config;
   }
 
   // Resolve dependencies
-  if ((_.isArray(serviceLoader.requires) && serviceLoader.requires.length > 0) ||
+  if ((_.isArray(serviceLoader.requires) &&
+    serviceLoader.requires.length > 0) ||
     (_.isString(serviceLoader.requires))) {
-
-    const requires = (_.isString(serviceLoader.requires) ? [serviceLoader.requires]
-    : serviceLoader.requires);
+    const requires = (_.isString(serviceLoader.requires) ?
+      [serviceLoader.requires] : serviceLoader.requires);
 
     for (const dependencyName of requires) {
       if (container.services[dependencyName]) {

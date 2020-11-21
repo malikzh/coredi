@@ -2,6 +2,12 @@ const _ = require('lodash');
 const providerInstance = require('./provider-instance');
 const serviceLoader = require('./service-loader');
 
+/**
+ * Merge two schemas
+ * @param {Object} a Main schema
+ * @param {Object} b Package schema
+ * @return {Object}
+ */
 function mergeSchema(a, b) {
   const sc = _.cloneDeep(a);
 
@@ -30,7 +36,9 @@ module.exports = async function(schema, containerName) {
   const parentSchema = this.schema[this.containerName];
 
   const newSchema = {
-    [containerName]: mergeSchema(mergeSchema(parentSchema, this.schema[containerName] || {}), schema || {}),
+    [containerName]: mergeSchema(
+        mergeSchema(parentSchema, this.schema[containerName] || {}),
+        schema || {}),
   };
 
   const instance = providerInstance();

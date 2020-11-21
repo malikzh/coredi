@@ -8,8 +8,8 @@ if (!assert.rejects) {
     let rejected = false;
 
     try {
-      await func()
-    } catch(e) {
+      await func();
+    } catch (e) {
       rejected = true;
     }
 
