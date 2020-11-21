@@ -1,4 +1,6 @@
-package.lock
+package-lock.json
 node_modules/
 .idea/
 .vscode/
+.nyc_output/
+coverage/
