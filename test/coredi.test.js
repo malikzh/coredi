@@ -31,6 +31,7 @@ describe('Coredi Builder test', async function() {
           };
           serviceLoaderSpy();
         },
+        './fork': async function() {},
       });
 
       const schema = {

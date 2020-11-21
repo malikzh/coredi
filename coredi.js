@@ -1,5 +1,6 @@
 const providerInstance = require('./provider-instance');
 const serviceLoader = require('./service-loader');
+const forkContainer = require('./fork');
 
 /**
  * Create coredi container
@@ -15,6 +16,7 @@ module.exports = async function(schema, containerName) {
   instance.services = {};
   instance.parent = null;
   instance.children = {};
+  instance.fork = forkContainer;
 
   const dependencyStack = [];
 
