@@ -4,6 +4,7 @@
 ![Dependabot](https://api.dependabot.com/badges/status?host=github&repo=empla/coredi)
 ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/empla/coredi)
 ![GitHub](https://img.shields.io/github/license/empla/coredi)
+![npm](https://img.shields.io/npm/dm/@empla/coredi)
 
 Dependency Injection library for Node.jS and Browser
 
