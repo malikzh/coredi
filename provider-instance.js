@@ -1,5 +1,5 @@
 module.exports = function() {
-  return function Instance(serviceName) {
+  return function Instance(serviceName, ...args) {
     const serviceMatch =
       /^([a-z0-9_\/@]+?)(?:@([a-z0-9_\-]+))?(?::([a-z0-9_.]+))?$/i;
 
@@ -28,9 +28,13 @@ module.exports = function() {
     }
 
     if (!param) {
-      return services[name];
+      if (args.length < 1) {
+        return services[name];
+      } else {
+        return services[name](...args);
+      }
     }
 
-    return services[name](param);
+    return services[name](param, ...args);
   };
 };
