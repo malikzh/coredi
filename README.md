@@ -86,6 +86,6 @@ CoreDI licensed under [MIT License](LICENSE)
 - [@malikzh](https://github.com/malikzh)
 
 ----
-Copyright (c) 2020 EMPLA GROUP, Ltd
+Copyright (c) 2020 EMPLA GROUP, LLC
 
 *Made with ❤️*
