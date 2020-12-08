@@ -30,9 +30,10 @@ function mergeSchema(a, b) {
  *
  * @param {Object} schema Container schemd
  * @param {String} containerName Name of container
+ * @param {Object} options Container options
  * @return {Promise<Function>} Forked container
  */
-module.exports = async function(schema, containerName) {
+module.exports = async function(schema, containerName, options) {
   const parentSchema = this.schema[this.containerName];
 
   const newSchema = {
@@ -47,6 +48,7 @@ module.exports = async function(schema, containerName) {
   instance.services = {};
   instance.parent = this;
   instance.children = {};
+  instance.options = options || {};
 
   this.children[containerName] = instance;
 

@@ -7,15 +7,17 @@ const forkContainer = require('./fork');
  *
  * @param {Object} schema Container schema
  * @param {String} containerName Name of current container
+ * @param {Object} options Container options
  * @return {Promise<Function>} CoreDI container
  */
-module.exports = async function(schema, containerName) {
+module.exports = async function(schema, containerName, options) {
   const instance = providerInstance();
   instance.containerName = containerName;
   instance.schema = schema;
   instance.services = {};
   instance.parent = null;
   instance.children = {};
+  instance.options = options || {};
   instance.fork = forkContainer;
 
   const dependencyStack = [];
