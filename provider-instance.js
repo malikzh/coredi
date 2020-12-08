@@ -1,7 +1,7 @@
 module.exports = function() {
   return function Instance(serviceName) {
     const serviceMatch =
-      /^([a-z0-9_]+)(?:@([a-z0-9_\-]+))?(?::([a-z0-9_]+))?$/i;
+      /^([a-z0-9_]+)(?:@([a-z0-9_\-]+))?(?::([a-z0-9_\.]+))?$/i;
 
     const matched = serviceName.match(serviceMatch);
 
