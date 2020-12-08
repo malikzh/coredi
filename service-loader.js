@@ -49,6 +49,10 @@ module.exports = async function loadService(container, serviceName,
         'create() function not found in service loader: ' + serviceName);
   }
 
+  if (_.isFunction(container.log)) {
+    container.log('Loading service "' + serviceName + '"...');
+  }
+
   // Merge configuration
   if (_.isObject(container.schema[container.containerName].config) &&
     _.isObject(container.schema[container.containerName].config[serviceName])) {

@@ -49,6 +49,7 @@ module.exports = async function(schema, containerName, options) {
   instance.parent = this;
   instance.children = {};
   instance.options = options || {};
+  instance.log = this.log;
 
   this.children[containerName] = instance;
 
