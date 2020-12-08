@@ -50,7 +50,8 @@ module.exports = async function loadService(container, serviceName,
   }
 
   if (_.isFunction(container.log)) {
-    container.log('Loading service "' + serviceName + '"...');
+    container.log('Loading service "' + serviceName + '" from application ' +
+      '"' + container.containerName + '"...');
   }
 
   // Merge configuration
