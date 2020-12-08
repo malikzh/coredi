@@ -60,7 +60,7 @@ module.exports = async function(schema, containerName, options) {
       continue;
     }
 
-    await serviceLoader(instance, loader.name, false, dependencyStack);
+    await serviceLoader(instance, loader.name, true, dependencyStack);
   }
 
   return instance;
