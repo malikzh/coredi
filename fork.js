@@ -42,13 +42,17 @@ module.exports = async function(schema, containerName, options) {
         schema || {}),
   };
 
+  options = options || {};
+
+  _.defaultsDeep(options, this.options);
+
   const instance = providerInstance();
   instance.containerName = containerName;
   instance.schema = newSchema;
   instance.services = {};
   instance.parent = this;
   instance.children = {};
-  instance.options = options || {};
+  instance.options = options;
   instance.log = this.log;
 
   this.children[containerName] = instance;
