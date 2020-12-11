@@ -55,7 +55,11 @@ module.exports = async function(schema, containerName, options) {
 
   const dependencyStack = [];
 
-  for (const loader of newSchema[containerName].loaders) {
+  for (let loader of newSchema[containerName].loaders) {
+    if (loader.__esModule) {
+      loader = loader.default;
+    }
+
     if (instance.services[loader.name]) {
       continue;
     }

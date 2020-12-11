@@ -31,7 +31,11 @@ module.exports = async function(schema, containerName, options, logFunc) {
 
   const loaders = instance.schema[instance.containerName].loaders;
 
-  for (const loader of loaders) {
+  for (let loader of loaders) {
+    if (loader.__esModule) {
+      loader = loader.default;
+    }
+
     if (instance.services[loader.name]) {
       continue;
     }
