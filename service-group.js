@@ -27,7 +27,11 @@ module.exports = function(groupName, loaders) {
 
       service.services = {};
 
-      for (const loader of loaders) {
+      for (let loader of loaders) {
+        if (loader.__esModule) {
+          loader = loader.default;
+        }
+
         loader.config = _.defaultsDeep(this.config[loader.name] || {},
             loader.config);
 

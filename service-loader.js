@@ -26,12 +26,16 @@ module.exports = async function loadService(container, serviceName,
     throw new Error('Invalid container given');
   }
 
-  const serviceLoader = container.schema[container.containerName].loaders
-      .find((s) => s.name === serviceName);
+  let serviceLoader = container.schema[container.containerName].loaders
+      .find((s) => (!s.__esModule && s.name === serviceName) ||
+        (s.__esModule && s.default.name === serviceName));
 
   if (!serviceLoader) {
     throw new Error('Cannot find service loader for service: ' + serviceName);
   }
+
+  serviceLoader = (serviceLoader.__esModule ?
+    serviceLoader.default : serviceLoader);
 
   if (!_.isObject(serviceLoader.config)) {
     serviceLoader.config = {};
