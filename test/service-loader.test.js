@@ -103,10 +103,6 @@ describe('Service loader test', function() {
     await assert.rejects(loadService(container, 'testx', true, null), {
       message: 'create() function not found in service loader: testx',
     });
-
-    await assert.rejects(loadService(container, 'testy', true, null), {
-      message: 'Service testy provides nothing',
-    });
   });
 
   it('Test configuration merge', async function() {
@@ -135,9 +131,7 @@ describe('Service loader test', function() {
     container.services = {};
     container.containerName = 'test123';
 
-    await assert.rejects(loadService(container, 'testx', false, null), {
-      message: 'Service testx provides nothing',
-    });
+    await loadService(container, 'testx', false, null);
 
     assert.deepStrictEqual(container.schema.test123.loaders[0].config, {
       param1: 'fff',
