@@ -16,15 +16,18 @@ module.exports = function() {
     let services = Instance.services;
 
     if (scope) {
-      if (!Instance.parent || (!Instance.parent.children[scope] &&
-        scope !== Instance.parent.containerName)) {
-        return null;
-      }
-
-      if (scope === Instance.parent.containerName) {
-        services = Instance.parent.services;
+      if (!Instance.parent) {
+        if (scope !== Instance.containerName) {
+          return null;
+        }
       } else {
-        services = Instance.parent.children[scope].services;
+        if (scope === Instance.parent.containerName) {
+          services = Instance.parent.services;
+        } else if (Instance.parent.children[scope]) {
+          services = Instance.parent.children[scope].services;
+        } else {
+          return null;
+        }
       }
     }
 
