@@ -20,7 +20,11 @@ module.exports = function() {
         return null;
       }
 
-      services = Instance.parent.children[scope].services;
+      if (scope === Instance.parent.containerName) {
+        services = Instance.parent.services;
+      } else {
+        services = Instance.parent.children[scope].services;
+      }
     }
 
     if (!services[name]) {
