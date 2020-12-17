@@ -16,7 +16,8 @@ module.exports = function() {
     let services = Instance.services;
 
     if (scope) {
-      if (!Instance.parent || !Instance.parent.children[scope]) {
+      if (!Instance.parent || (!Instance.parent.children[scope] &&
+        scope !== Instance.parent.containerName)) {
         return null;
       }
 
