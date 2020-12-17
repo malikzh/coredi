@@ -13,7 +13,8 @@ function mergeSchema(a, b) {
 
   // merge loaders
   if (_.isArray(b.loaders)) {
-    sc.loaders = _.unionBy(b.loaders, sc.loaders, 'name');
+    sc.loaders = _.unionBy(b.loaders, sc.loaders,
+        (v) => v.__esModule ? v.default.name : v.name);
   }
 
   // config
