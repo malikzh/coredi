@@ -18,7 +18,11 @@ module.exports = function() {
     if (scope) {
       if (!Instance.parent) {
         if (scope !== Instance.containerName) {
-          return null;
+          if (Instance.children && Instance.children[scope]) {
+            services = Instance.children[scope].services;
+          } else {
+            return null;
+          }
         }
       } else {
         if (scope === Instance.parent.containerName) {
