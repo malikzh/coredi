@@ -95,6 +95,6 @@ module.exports = async function loadService(container, serviceName,
   }
 
   // Create service
-  container.services[serviceName] =
-    await serviceLoader[createFuncName](container);
+  const service = await serviceLoader[createFuncName](container);
+  container.services[serviceName] = (!_.isNil(service) ? service : null);
 };
