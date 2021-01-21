@@ -44,20 +44,27 @@ module.exports = async function loadService(container, serviceName,
   // Check service creation function
   let createFuncName = 'create';
 
+  if (!_.isFunction(serviceLoader[createFuncName])) {
+    throw new Error(
+        createFuncName +
+        '() function not found in service loader: ' + serviceName);
+  }
+
   if (forkMode) {
     const forkFunc = serviceLoader['fork'];
 
     if (_.isFunction(forkFunc)) {
       createFuncName = 'fork';
     } else {
-      createFuncName = _.isNil(forkFunc) || Boolean(forkFunc);
+      createFuncName = forkFunc;
     }
   }
 
   if (_.isString(createFuncName) &&
     !_.isFunction(serviceLoader[createFuncName])) {
     throw new Error(
-        'create() function not found in service loader: ' + serviceName);
+        createFuncName +
+        '() function not found in service loader: ' + serviceName);
   }
 
   if (_.isFunction(container.log)) {
@@ -107,13 +114,22 @@ module.exports = async function loadService(container, serviceName,
 
   if (_.isString(createFuncName)) {
     service = await serviceLoader[createFuncName](container);
-  } else if (createFuncName) {
-    if (!_.isFunction(serviceLoader['create'])) {
-      throw new Error(
-          'create() function not found in service loader: ' + serviceName);
-    }
+  } else {
+    if (_.isBoolean(createFuncName)) {
+      if (createFuncName) {
+        if (!_.isFunction(serviceLoader['create'])) {
+          throw new Error(
+              'create() function not found in service loader: ' + serviceName);
+        }
 
-    service = await serviceLoader['create'](container);
+        service = await serviceLoader['create'](container);
+      }
+    } else {
+      if (container.parent && container.parent.services &&
+        container.parent.services[serviceName]) {
+        service = container.parent.services[serviceName];
+      }
+    }
   }
 
   container.services[serviceName] = (!_.isNil(service) ? service : null);
