@@ -44,11 +44,18 @@ module.exports = async function loadService(container, serviceName,
   // Check service creation function
   let createFuncName = 'create';
 
-  if (forkMode && _.isFunction(serviceLoader['fork'])) {
-    createFuncName = 'fork';
+  if (forkMode) {
+    const forkFunc = serviceLoader['fork'];
+
+    if (_.isFunction(forkFunc)) {
+      createFuncName = 'fork';
+    } else {
+      createFuncName = _.isNil(forkFunc) || Boolean(forkFunc);
+    }
   }
 
-  if (!_.isFunction(serviceLoader[createFuncName])) {
+  if (_.isString(createFuncName) &&
+    !_.isFunction(serviceLoader[createFuncName])) {
     throw new Error(
         'create() function not found in service loader: ' + serviceName);
   }
@@ -95,6 +102,18 @@ module.exports = async function loadService(container, serviceName,
   }
 
   // Create service
-  const service = await serviceLoader[createFuncName](container);
+  let service = null;
+
+  if (_.isString(createFuncName)) {
+    service = await serviceLoader[createFuncName](container);
+  } else if (createFuncName) {
+    if (!_.isFunction(serviceLoader['create'])) {
+      throw new Error(
+          'create() function not found in service loader: ' + serviceName);
+    }
+
+    service = await serviceLoader['create'](container);
+  }
+
   container.services[serviceName] = (!_.isNil(service) ? service : null);
 };
