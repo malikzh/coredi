@@ -128,6 +128,13 @@ module.exports = async function loadService(container, serviceName,
       if (container.parent && container.parent.services &&
         container.parent.services[serviceName]) {
         service = container.parent.services[serviceName];
+      } else {
+        if (!_.isFunction(serviceLoader['create'])) {
+          throw new Error(
+              'create() function not found in service loader: ' + serviceName);
+        }
+
+        service = await serviceLoader['create'](container);
       }
     }
   }
