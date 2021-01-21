@@ -65,7 +65,8 @@ module.exports = async function(schema, containerName, options) {
       loader = loader.default;
     }
 
-    if (instance.services[loader.name]) {
+    if (instance.services[loader.name] ||
+      instance.services[loader.name] === null) {
       continue;
     }
 

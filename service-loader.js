@@ -83,7 +83,8 @@ module.exports = async function loadService(container, serviceName,
       [serviceLoader.requires] : serviceLoader.requires);
 
     for (const dependencyName of requires) {
-      if (container.services[dependencyName]) {
+      if (container.services[dependencyName] ||
+        container.services[dependencyName] === null) {
         continue;
       }
 
