@@ -126,7 +126,8 @@ module.exports = async function loadService(container, serviceName,
       }
     } else {
       if (container.parent && container.parent.services &&
-        container.parent.services[serviceName]) {
+        (container.parent.services[serviceName] ||
+          container.parent.services[serviceName] === null)) {
         service = container.parent.services[serviceName];
       } else {
         if (!_.isFunction(serviceLoader['create'])) {
